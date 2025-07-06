@@ -18,14 +18,14 @@ import { createInvoicePdfDoc } from "./server-utils.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load environment variables from .env.local
-dotenv.config({ path: '../.env.local' });
-
-// For debugging - log that we're trying to load environment variables
-console.log('Loading environment variables from .env.local');
-
-// Load environment variables directly from the .env.local file
-dotenv.config({ path: '../.env.local' });
+// Load environment variables from .env.local for local development
+// In production (Render), environment variables are set via dashboard
+if (process.env.NODE_ENV !== 'production') {
+  dotenv.config({ path: '../.env.local' });
+  console.log('Loading environment variables from .env.local');
+} else {
+  console.log('Using environment variables from deployment platform');
+}
 
 // Setup email configuration from environment variables
 // This ensures we have the correct credentials for Nodemailer
@@ -41,6 +41,8 @@ console.log('- Email Password length:', EMAIL_PASSWORD ? EMAIL_PASSWORD.length :
 const app = express();
 const port = process.env.PORT || 3001;
 
+console.log(`Server will run on port: ${port}`);
+
 // Initialize Stripe with the secret key from environment variables
 const stripe = new Stripe(process.env.VITE_STRIPE_SECRET_KEY);
 
@@ -54,7 +56,9 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, '../client/dist')));
+const staticPath = path.join(__dirname, '../client/dist');
+console.log(`Serving static files from: ${staticPath}`);
+app.use(express.static(staticPath));
 
 // API Routes
 app.post("/api/create-payment-intent", async (req, res) => {
@@ -195,8 +199,15 @@ app.post("/api/send-invoice", async (req, res) => {
 });
 
 // Catch-all handler: send back React's index.html file for any non-API routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+app.use((req, res) => {
+  // Skip API routes
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ error: 'API route not found' });
+  }
+  
+  // For all other routes, serve the React app
+  const indexPath = path.join(__dirname, '../client/dist/index.html');
+  res.sendFile(indexPath);
 });
 
 // Start the server
