@@ -163,7 +163,7 @@ npm run dev
 
 For technical support or business inquiries:
 - Email: [arfarayen20@gmail.com]
-- Live Demo: [https://pfe2025-d05c3.web.app/]
+- Live Demo: [https://sharepay-y4jq.onrender.com]
 
 ## 📄 License
 

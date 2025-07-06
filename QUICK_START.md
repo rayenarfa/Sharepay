@@ -1,36 +1,10 @@
-# 🚀 SharePay Quick Start Guide
 
-Welcome to SharePay! Your application has been professionally reorganized into a clean client-server architecture.
 
-## 📁 New Project Structure
+## ⚡ Quick Start
 
-```
-pfeapp-main/
-├── client/              # React Frontend Application
-│   ├── src/            # React components and pages
-│   ├── public/         # Static assets (logo, icons)
-│   ├── package.json    # Client dependencies
-│   └── README.md       # Client documentation
-├── server/              # Node.js Backend Server
-│   ├── server.js       # Main server file
-│   ├── server-utils.js # Server utilities
-│   ├── functions/      # Firebase functions
-│   ├── package.json    # Server dependencies
-│   └── README.md       # Server documentation
-├── .env.local          # Environment variables (secure)
-├── start.ps1           # Quick start script
-├── package.json        # Root package.json with scripts
-└── README.md           # Main documentation
-```
 
-## ⚡ Super Quick Start
 
-### Option 1: Use the Start Script (Windows)
-```powershell
-.\start.ps1
-```
-
-### Option 2: Manual Start
+### Start
 ```bash
 # Install all dependencies
 npm run install:all
@@ -95,23 +69,3 @@ npm run start:server    # Start production server
 npm run install:all     # Install all dependencies
 npm run clean          # Clean node_modules and build files
 ```
-
-## ✅ What's Been Secured
-
-- ✅ All hardcoded credentials removed
-- ✅ Environment variables properly configured
-- ✅ Gmail and Stripe keys secured
-- ✅ Professional project structure
-- ✅ Comprehensive documentation
-
-## 🚀 Ready for Production
-
-Your SharePay application is now:
-- **Secure** - No exposed credentials
-- **Organized** - Clean client-server separation
-- **Documented** - Comprehensive README files
-- **Professional** - Ready for sale or deployment
-
----
-
-**Happy coding! 🎁✨** 
