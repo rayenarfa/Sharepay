@@ -1,0 +1,20 @@
+{
+  "name": "sharepay-app",
+  "version": "1.0.0",
+  "description": "SharePay Gift Card E-commerce Platform",
+  "main": "server/server.js",
+  "scripts": {
+    "install-client": "cd client && npm install",
+    "install-server": "cd server && npm install",
+    "build": "cd client && npm run build",
+    "start": "cd server && npm start",
+    "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm start\"",
+    "postinstall": "npm run install-client && npm run install-server && npm run build"
+  },
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
