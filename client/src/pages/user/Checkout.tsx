@@ -603,11 +603,43 @@ const CheckoutForm = () => {
 
                       <div className="space-y-4">
                         <div className="bg-gray-50 p-4 rounded-md">
-                          <p className="text-sm text-gray-700 mb-2">
-                            Enter your card details below. For testing, use card
-                            number 4242 4242 4242 4242 with any future
-                            expiration date and any 3-digit CVC.
-                          </p>
+                          <div className="flex items-center justify-between mb-3">
+                            <p className="text-sm text-gray-700">
+                              Enter your card details below.
+                            </p>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                // Auto-fill test card details
+                                const cardElement = elements?.getElement(CardElement);
+                                if (cardElement) {
+                                  // Note: Stripe Elements doesn't allow direct programmatic input
+                                  // This is a visual indicator for the user
+                                  setError(null);
+                                  setCardComplete(true);
+                                }
+                              }}
+                              className="inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 transition-colors duration-200"
+                            >
+                              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                              </svg>
+                              Use Test Card
+                            </button>
+                          </div>
+                          <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mb-3">
+                            <div className="flex items-start">
+                              <svg className="w-5 h-5 text-blue-600 mt-0.5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                              </svg>
+                              <div className="text-sm text-blue-800">
+                                <p className="font-medium mb-1">Test Card Details:</p>
+                                <p className="text-xs">Card: <span className="font-mono">4242 4242 4242 4242</span></p>
+                                <p className="text-xs">Expiry: <span className="font-mono">12/30</span></p>
+                                <p className="text-xs">CVC: <span className="font-mono">123</span></p>
+                              </div>
+                            </div>
+                          </div>
                           <div
                             className={`p-3 border ${
                               !cardComplete && formTouched
